@@ -1,0 +1,19 @@
+.item {
+  border: 1px solid #eee;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.btn-delete {
+  float: right;
+  border: 1px solid #aaa;
+  color: rgb(75, 163, 223);
+  font-size: 12px;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.item-content {
+  text-indent: 40px;
+}

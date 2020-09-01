@@ -1,15 +1,15 @@
 import React from 'react'
-import Prototypes from 'prop-types'
+import Pubsub from 'pubsub-js'
 
 class SearchHeader extends React.Component {
-  static prototypes = {
-    setSearchName: Prototypes.func.isRequired
-  }
 
   search = () => {
     // 获取数据
     const searchName = this.input.value.trim()
-    searchName && this.props.setSearchName(searchName)
+    if (searchName) {
+      // 发布消息（search）
+      Pubsub.publish('search', searchName)
+    }
   }
 
   render () {

@@ -23,3 +23,7 @@
 .cmt-list {
   flex: 1;
 }
+
+.active {
+  color: rgb(75, 177, 224);
+}

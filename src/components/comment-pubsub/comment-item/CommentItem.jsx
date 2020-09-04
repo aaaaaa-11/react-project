@@ -5,7 +5,7 @@ import Pubsub from 'pubsub-js'
 import './cmt-item.css'
 
 class CommentItem extends React.Component {
-  static prototypes = {
+  static propTypes = {
     comment: Prototypes.object.isRequired,
     index: Prototypes.number.isRequired
   }

@@ -3,7 +3,7 @@ import Prototypes from 'prop-types'
 import axios from 'axios'
 
 class SearchResults extends React.Component {
-  static prototypes = {
+  static propTypes = {
     searchName: Prototypes.string.isRequired
   }
 

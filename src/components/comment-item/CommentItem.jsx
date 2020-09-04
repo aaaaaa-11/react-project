@@ -4,7 +4,7 @@ import Prototypes from 'prop-types'
 import './cmt-item.css'
 
 class CommentItem extends React.Component {
-  static prototypes = {
+  static propTypes = {
     comment: Prototypes.object.isRequired,
     delComment: Prototypes.func.isRequired,
     index: Prototypes.number.isRequired

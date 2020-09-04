@@ -2,7 +2,7 @@ import React from 'react'
 import Prototypes from 'prop-types'
 
 class SearchHeader extends React.Component {
-  static prototypes = {
+  static propTypes = {
     setSearchName: Prototypes.func.isRequired
   }
 

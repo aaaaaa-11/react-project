@@ -4,7 +4,7 @@ import Prototypes from 'prop-types'
 import './cmt-add.css'
 
 class CommentAdd extends React.Component {
-  static prototypes = {
+  static propTypes = {
     addComment: Prototypes.func.isRequired
   }
 

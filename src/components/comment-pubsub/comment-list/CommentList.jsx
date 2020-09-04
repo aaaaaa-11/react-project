@@ -4,7 +4,7 @@ import Prototypes from 'prop-types'
 
 class CommentList extends React.Component {
   // 给组件类指定属性
-  static prototypes = {
+  static propTypes = {
     comments: Prototypes.array.isRequired
   }
 

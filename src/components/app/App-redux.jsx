@@ -1,28 +1,23 @@
 import React from 'react'
-import Protypes from 'prop-types'
-import { connect } from 'react-redux'
+import * as actions from '../../redux/actions'
 
 import './app.css'
 
+var timer = null
 class App extends React.Component {
-  static propTypes = {
-    count: Protypes.number.isRequired,
-    increment: Protypes.func.isRequired,
-    decrement: Protypes.func.isRequired
-  }
 
   increment = () => {
     // 获取选择增加量
     let num = this.select.value * 1
     // 调用store的方法更新状态
-    this.props.increment(num)
+    this.props.store.dispatch(actions.increment(num))
   }
 
   decrement = () => {
     let num = this.select.value * 1
     const count = this.props.store.getState()
     if (count >= num) {
-      this.props.decrement(num)
+      this.props.store.dispatch(actions.decrement(num))
     }
   }
 
@@ -30,21 +25,24 @@ class App extends React.Component {
     let num = this.select.value * 1
     const count = this.props.store.getState()
     if (count % 2) {
-      this.props.increment(num)
+      this.props.store.dispatch(actions.increment(num))
     }
   }
 
   asyncIncrement = () => {
     // 获取选择增加量
     let num = this.select.value * 1
-    // 更新状态
-    setTimeout(() => {
-      this.props.increment(num)
+    if (timer) {
+      clearTimeout(timer)
+      // 更新状态
+    }
+    timer = setTimeout(() => {
+      this.props.store.dispatch(actions.increment(num))
     }, 500)
   }
 
   render () {
-    const {count} = this.props
+    const count = this.props.store.getState()
     return (
       <div className="app-container">
         <p className="click-count">Click&nbsp;{count}&nbsp;times</p>
@@ -63,6 +61,4 @@ class App extends React.Component {
     )
   }
 }
-export default connect(
-  state => ({count: state}, {})
-)(App)
+export default App

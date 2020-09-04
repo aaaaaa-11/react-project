@@ -1,53 +1,64 @@
 import React from 'react'
-import Protypes from 'prop-types'
-import { connect } from 'react-redux'
 
 import './app.css'
 
 class App extends React.Component {
-  static propTypes = {
-    count: Protypes.number.isRequired,
-    increment: Protypes.func.isRequired,
-    decrement: Protypes.func.isRequired
+  state = {
+    count: 0
   }
 
   increment = () => {
     // 获取选择增加量
-    let num = this.select.value * 1
-    // 调用store的方法更新状态
-    this.props.increment(num)
+    let num = this.select.value
+    num = Number(num)
+    // 得到原count
+    const count = this.state.count
+    // 更新状态
+    this.setState({
+      count: count + num
+    })
   }
 
   decrement = () => {
-    let num = this.select.value * 1
-    const count = this.props.store.getState()
+    let num = this.select.value
+    num = Number(num) || 0
+    const count = this.state.count
     if (count >= num) {
-      this.props.decrement(num)
+      this.setState({
+        count: count - num
+      })
     }
   }
 
   incrementIfOdd = () => {
-    let num = this.select.value * 1
-    const count = this.props.store.getState()
+    let num = this.select.value
+    num = Number(num)
+    const count = this.state.count
     if (count % 2) {
-      this.props.increment(num)
+      this.setState({
+        count: count + num
+      })
     }
   }
 
   asyncIncrement = () => {
     // 获取选择增加量
-    let num = this.select.value * 1
+    let num = this.select.value
+    num = Number(num)
+    // 得到原count
+    const count = this.state.count
     // 更新状态
     setTimeout(() => {
-      this.props.increment(num)
+      this.setState({
+        count: count + num
+      })
     }, 500)
   }
 
   render () {
-    const {count} = this.props
     return (
       <div className="app-container">
-        <p className="click-count">Click&nbsp;{count}&nbsp;times</p>
+        <p className="click-count">Click&nbsp;{this.state.count}&nbsp;times</p>
         <div className="btn-wrapper">
           <select name="count" ref={select => this.select = select}>
             <option value="1">1</option>
@@ -63,6 +74,4 @@ class App extends React.Component {
     )
   }
 }
-export default connect(
-  state => ({count: state}, {})
-)(App)
+export default App

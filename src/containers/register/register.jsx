@@ -11,7 +11,10 @@ import {
   Radio,
   Button
 } from 'antd-mobile'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
+import { register } from '../../redux/actions'
 import Logo from '../../components/logo/logo'
 
 const ListItem = List.Item
@@ -25,7 +28,7 @@ class Register extends Component {
   }
 
   register = () => {
-    console.log(this.state);
+    this.props.register(this.state)
   }
 
   // 处理输入数据的改变：更新对应的状态
@@ -42,17 +45,23 @@ class Register extends Component {
 
   render () {
     const {type} = this.state
+    const {msg, redirectTo} = this.props.user
+    // 如果redirectTo有值，就需要重定向到指定的路由
+    if (redirectTo) {
+      return <Redirect to={redirectTo}/>
+    }
     return (
       <div>
         <NavBar>前&nbsp;端&nbsp;招&nbsp;聘</NavBar>
         <Logo />
         <WingBlank>
           <List>
+            { msg ? <div className="err-msg">{msg}</div> : null }
             <WhiteSpace />
             <InputItem placeholder="请输入用户名" onChange={val => {this.handleChage('username', val)}}>用户名：</InputItem>
             <WhiteSpace />
             <InputItem placeholder="请输入密码" type="password" onChange={val => {this.handleChage('password', val)}}>密&nbsp;&nbsp;&nbsp;码：</InputItem>
-            <InputItem placeholder="确认密码" onChange={val => {this.handleChage('password2', val)}}>确认密码：</InputItem>
+            <InputItem placeholder="确认密码" type="password" onChange={val => {this.handleChage('password2', val)}}>确认密码：</InputItem>
             <ListItem>
               <span>用户类型：</span>&nbsp;
               <Radio checked={type === 'dashen'} onClick={() => this.handleChage('type', 'dashen')}>大神</Radio>&nbsp;&nbsp;&nbsp;
@@ -67,4 +76,7 @@ class Register extends Component {
   }
 }
 
-export default Register
+export default connect(
+  state => ({user: state.user}),
+  {register}
+)(Register)

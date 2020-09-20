@@ -13,7 +13,7 @@ class HeaderSelector extends React.Component {
     this.headerList = []
     for (let i=0; i<10; i++) {
       this.headerList.push({
-        icon: require(`./img/avatar${i+1}.png`),  // 不能使用import
+        icon: require(`../../assets/img/avatar${i+1}.png`),  // 不能使用import
         text: '头像' + i + 1
       })
     }

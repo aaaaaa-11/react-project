@@ -1,7 +1,10 @@
 // 包含n个reducer函数：根据老的state和指定的action返回新的sate
 import { combineReducers } from 'redux'
 import {
-  AUTH_SUCCESS, ERROR_MSG, RESET_USER, RESIVE_USER
+  AUTH_SUCCESS,
+  ERROR_MSG,
+  RESET_USER,
+  RESIVE_USER
 } from './action-type';
 
 import {getRedirectTo} from '../utils'
@@ -24,7 +27,7 @@ function user (state=initUser, action) {
     case RESIVE_USER:
       return action.data
     case RESET_USER:
-      return {...initUser, msg: action.msg}
+      return {...initUser, msg: action.data}
     default:
       return state;
   }
